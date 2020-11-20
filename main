@@ -1,0 +1,4 @@
+main_swift='./Sources/PackageDescription/main.swift'
+
+cat $1 > $main_swift
+echo '\n\nimport Foundation\n\nprint(String(data: try JSONEncoder().encode(package), encoding: .utf8) ?? "")' >> $main_swift
