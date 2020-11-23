@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd $(dirname $0)
+main_swift="Sources/PackageDescription/main.swift"
+
+cat $1 > $main_swift
+echo "" >> $main_swift
+echo 'import Foundation' >> $main_swift
+echo 'print(String(data: try JSONEncoder().encode(package), encoding: .utf8) ?? "")' >> $main_swift
+swift run 2>/dev/null
