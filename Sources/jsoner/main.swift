@@ -1,1 +1,1 @@
-print("Hello, world!")
+JSONer.main()

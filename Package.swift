@@ -4,16 +4,25 @@
 import PackageDescription
 
 let package = Package(
-    name: "jsoner",
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "jsoner",
-            dependencies: [])
-    ]
+        name: "JSONer",
+        platforms: [.macOS(.v10_15)],
+        products: [
+            .executable(name: "JSONer", targets: ["JSONer"]),
+            .library(name: "CartfileParser", targets: ["CartfileParser"])
+        ],
+        dependencies: [
+            .package(url: "https://github.com/apple/swift-argument-parser.git", .exact("0.3.1")),
+        ],
+        targets: [
+            // Targets are the basic building blocks of a package. A target can define a module or a test suite.
+            // Targets can depend on other targets in this package, and on products in packages this package depends on.
+            .target(
+                    name: "JSONer",
+                    dependencies: [.product(name: "ArgumentParser", package: "swift-argument-parser"),
+                                   "CartfileParser"]),
+            .target(name: "CartfileParser"),
+            .testTarget(name: "CartfileParserTest",
+                        dependencies: ["CartfileParser"],
+                        resources: [.copy("Resources")])
+        ]
 )
