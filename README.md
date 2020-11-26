@@ -2,7 +2,7 @@
 
 ### Installaion
 ```
-maker
+make
 ```
 
 ### Usage
